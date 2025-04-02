@@ -15,13 +15,13 @@ export default function CreatePostPage() {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const navigate = useNavigate()
 
-  const userId = localStorage.getItem('userId') 
+  const userId = localStorage.getItem("userId") // Haqiqiy user ID bilan almashtiring
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (file) {
       if (file.size > 10 * 1024 * 1024) {
-        setError("Rasm hajmi 10MB dan kichik bo‘lishi kerak")
+        setError("Fayl hajmi 10MB dan kichik bo‘lishi kerak")
         return
       }
 
@@ -52,7 +52,7 @@ export default function CreatePostPage() {
     setError(null)
 
     try {
-      await createPost(userId, text, imageFile); // To‘g‘ridan-to‘g‘ri fayl yuboriladi
+      await createPost(userId, text, imageFile);
       navigate("/")
     } catch (error: any) {
       setError(error.message || "Post yaratishda xatolik")
@@ -123,7 +123,7 @@ export default function CreatePostPage() {
                 type="file"
                 ref={fileInputRef}
                 onChange={handleImageChange}
-                accept="image/*"
+                accept="image/*" // Barcha rasm turlari qo'llab-quvvatlanadi
                 className="hidden"
               />
             </div>

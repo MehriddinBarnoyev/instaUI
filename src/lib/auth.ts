@@ -74,6 +74,7 @@ export const registerUser = async (userData: { name: string; username: string; e
     // Store token
     localStorage.setItem("token", data.token)
 
+    localStorage.setItem("userId", data.user.id)
     console.log(data);
     
     return data
