@@ -1,43 +1,24 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { likePost, unlikePost } from "../../lib/like";
 
 const Like = ({ id }) => {
   const userId = localStorage.getItem("userId");
   const [liked, setLiked] = useState(false);
 
   const handleLike = async () => {
-    try {
-      const response = await axios.post(`http://localhost:5000/api/likes/like/${userId}`, {
-        post_id: id,
-      });
-
-      if (response.status === 201) {
-        setLiked(true);
-      }
-    } catch (error) {
-      console.error("Error liking post:", error);
+    if (await likePost(userId, id)) {
+      setLiked(true);
     }
   };
 
   const handleUnlike = async () => {
-    try {
-      const response = await axios.post(`http://localhost:5000/api/likes/unlike/${userId}`, {
-        data: { post_id: id }, // DELETE so we send data in `data`
-      });
-
-      if (response.status === 201) {
-        setLiked(false);
-      }
-    } catch (error) {
-      console.error("Error unliking post:", error);
+    if (await unlikePost(userId, id)) {
+      setLiked(false);
     }
   };
 
   return (
-    <button
-      className="text-sm text-gray-200"
-      onClick={liked ? handleUnlike : handleLike}
-    >
+    <button className="text-sm text-gray-200" onClick={liked ? handleUnlike : handleLike}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="26"

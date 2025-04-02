@@ -6,6 +6,8 @@ import highlightData from "../HighlightsData";
 // import Post from "../Post";
 
 const Profile = () => {
+  console.log("Profile component rendered");
+  
   return (
     <>
       <div className="lg:w-[88%] md:w-[88%] sm:w-full w-full h-auto lg-block md:block sm:hidden hidden">

@@ -24,6 +24,7 @@ function Home() {
           <Route exact path="/" element={<Feed />} />
           {/* Profile section */}
           <Route exact path="/profile" element={<Main />} />
+          
         </Routes>
       </div>
     </>
