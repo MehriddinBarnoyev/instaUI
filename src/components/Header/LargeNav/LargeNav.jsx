@@ -1,7 +1,3 @@
-"use client"
-
-import React from "react"
-import { useState } from "react"
 import { Link } from "react-router-dom"
 import InstagramLogo from "../../../assets/logo/instagram.png"
 import InstagramIcon from "../../../assets/logo/icon.png"
@@ -14,14 +10,8 @@ import NotificationsLogo from "../../../assets/navlogo/like.png"
 import CreateLogo from "../../../assets/navlogo/create.png"
 import ThreadsLogo from "../../../assets/navlogo/threads.png"
 import MoreLogo from "../../../assets/navlogo/more.png"
-import CreatePostModal from "../../create-post-modal"
 
 function LargeNav() {
-  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
-
-  // You would typically get this from your auth context or state management
-  const userId = "user123" // Replace with actual user ID from your auth system
-
   const sidebarItems = [
     {
       name: "Search",
@@ -50,11 +40,6 @@ function LargeNav() {
     },
     // Create item is handled separately now
   ]
-
-  const handleCreateClick = (e) => {
-    e.preventDefault()
-    setIsCreateModalOpen(true)
-  }
 
   return (
     <>
@@ -91,10 +76,10 @@ function LargeNav() {
               <p className="text-[16px] font-normal text-white lg:block md:hidden sm:hidden hidden">{item.name}</p>
             </Link>
           ))}
-          {/* Create button now opens modal */}
-          <button
-            onClick={handleCreateClick}
-            className="w-full h-auto flex items-center gap-x-4 p-3 bg-transparent hover:bg-gray-800/60 rounded-md ease-out duration-500 group text-left"
+          {/* Create link now navigates to the create post page */}
+          <Link
+            to="/create"
+            className="w-full h-auto flex items-center gap-x-4 p-3 bg-transparent hover:bg-gray-800/60 rounded-md ease-out duration-500 group"
           >
             <img
               src={CreateLogo || "/placeholder.svg"}
@@ -102,7 +87,7 @@ function LargeNav() {
               className="w-7 h-7 object-contain group-hover:scale-105 ease-out duration-300"
             />
             <p className="text-[16px] font-normal text-white lg:block md:hidden sm:hidden hidden">Create</p>
-          </button>
+          </Link>
           <Link
             to="/profile"
             className="w-full h-auto flex items-center gap-x-4 p-3 bg-transparent hover:bg-gray-800/60 rounded-md ease-out duration-500 group"
@@ -140,9 +125,6 @@ function LargeNav() {
           </Link>
         </div>
       </div>
-
-      {/* Create Post Modal */}
-      <CreatePostModal isOpen={isCreateModalOpen} onClose={() => setIsCreateModalOpen(false)} userId={userId} />
     </>
   )
 }
